@@ -56,11 +56,4 @@ public class AdminActivity extends AppCompatActivity {
 
     }
 
-    private void setFragment(int id, Class cl) {
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .add(id, cl, null)
-                .commit();
-    }
-
 }

@@ -2,6 +2,7 @@ package com.example.aq.network;
 
 import com.example.aq.model.InviteAnswer;
 import com.example.aq.model.InviteQuest;
+import com.example.aq.model.Person;
 import com.example.aq.model.Sere;
 import com.example.aq.model.ComplexSereList;
 
@@ -31,21 +32,21 @@ public interface RetrofitClientInterface {
 
     //@FormUrlEncoded
     @GET("person/id/{id}")
-    Call<InviteAnswer> createInviteQuest(@Path("id") int id);
+    Call<Person> getPerson(@Path("id") int id);
 
 
 
     @GET("admin/persons")
-    Call<ComplexSereList> getAllPersonsList();
+    Call<List<Person>> getAllPersonsList();
 
     @GET("admin/persons/pending")
-    Call<ComplexSereList> getAllPendingList();
+    Call<List<Person>> getAllPendingList();
 
     @GET("admin/persons/approved")
-    Call<ComplexSereList> getApprovedList();
+    Call<List<Person>> getApprovedList();
 
     @GET("admin/persons/rejected")
-    Call<ComplexSereList> getRejectedList();
+    Call<List<Person>> getRejectedList();
 
     @GET("admin/persons/fired")
     Call<ComplexSereList> getFiredList();
