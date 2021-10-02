@@ -22,4 +22,20 @@ public class PreferenceUtils {
     public static void setToken(String token) {
         sSharedPreferences.edit().putString("invite_token", token).commit();
     }
+
+    public static void isWelcomeShowed(boolean b) {
+        sSharedPreferences.edit().putBoolean("welcome", b).commit();
+    }
+
+    public static boolean isWelcomeShowed() {
+        return sSharedPreferences.getBoolean("welcome", false);
+    }
+
+    public static void isAdmin(boolean b) {
+        sSharedPreferences.edit().putBoolean("admin", b).commit();
+    }
+
+    public static boolean isAdmin() {
+        return sSharedPreferences.getBoolean("admin", false);
+    }
 }

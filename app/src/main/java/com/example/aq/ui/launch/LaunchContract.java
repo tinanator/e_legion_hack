@@ -1,20 +1,15 @@
-package com.example.aq.ui.invite_quest;
+package com.example.aq.ui.launch;
 
-import com.example.aq.model.InviteAnswer;
 import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
-import com.example.aq.model.Person;
-import com.example.aq.model.Sere;
 
-public interface InviteQuestContract {
+public interface LaunchContract {
     interface Model {
 
         interface OnFinishedListener {
             void onFinished (OwnPerson person);
             void onFailure(Throwable t);
         }
-
-        void sendInviteQuest(InviteQuest inviteQuest, OnFinishedListener onFinishedListener);
         void updatePersonData(OnFinishedListener onFinishedListener);
     }
     interface View {
@@ -24,6 +19,5 @@ public interface InviteQuestContract {
     interface Presenter {
         void onDestroy();
         void updatePersonData();
-        void requestData(InviteQuest inviteQuest);
     }
 }

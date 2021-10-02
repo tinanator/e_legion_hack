@@ -1,4 +1,4 @@
-package com.example.test2
+package com.example.eq.ui.user
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.aq.R
 
 object PersonSinglton{
 

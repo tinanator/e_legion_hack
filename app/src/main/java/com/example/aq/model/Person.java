@@ -4,69 +4,43 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Person implements Serializable {
-    String email;
-    String firstName;
-    String lastName;
-    String birthDay;
-
-    @SerializedName("invite_token")
-    @Expose
-    String inviteToken;
-
     @SerializedName("id")
     @Expose
     int id;
 
+    String email;
+    String firstname;
+    String lastname;
+    String birthday;
+
+    @SerializedName("position_id")
+    @Expose
+    String positionId;
+
     @SerializedName("account_status")
     @Expose
-    String account_status;
+    String accountStatus;
 
-
-    @SerializedName("position")
+    @SerializedName("current_position")
     @Expose
-    String position;
+    Position currentPostiton;
 
-    public String getEmail() {
-        return email;
-    }
+    @SerializedName("next_position")
+    @Expose
+    Position nextPosition;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    @SerializedName("achievements")
+    List<Achieve> achievements;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    int bonuses;
+    int admin;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    @SerializedName("create_stamp")
+    int createStamp;
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public String getInviteToken() {
-        return inviteToken;
-    }
-
-    public void setInviteToken(String inviteToken) {
-        this.inviteToken = inviteToken;
-    }
 
     public int getId() {
         return id;
@@ -76,33 +50,127 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public String getAccount_status() {
-        return account_status;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccount_status(String account_status) {
-        this.account_status = account_status;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPosition() {
-        return position;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPositionId() {
+        return positionId;
+    }
+
+    public void setPositionId(String positionId) {
+        this.positionId = positionId;
+    }
+
+    public String getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(String accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public Position getCurrentPostiton() {
+        return currentPostiton;
+    }
+
+    public void setCurrentPostiton(Position currentPostiton) {
+        this.currentPostiton = currentPostiton;
+    }
+
+    public Position getNextPosition() {
+        return nextPosition;
+    }
+
+    public void setNextPosition(Position nextPosition) {
+        this.nextPosition = nextPosition;
+    }
+
+    public List<Achieve> getAchievements() {
+        return achievements;
+    }
+
+    public void setAchievements(List<Achieve> achievements) {
+        this.achievements = achievements;
+    }
+
+    public int getBonuses() {
+        return bonuses;
+    }
+
+    public void setBonuses(int bonuses) {
+        this.bonuses = bonuses;
+    }
+
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }
+
+    public int getCreateStamp() {
+        return createStamp;
+    }
+
+    public void setCreateStamp(int createStamp) {
+        this.createStamp = createStamp;
     }
 
     @Override
     public String toString() {
         return "Person{" +
-                "email='" + email + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDay='" + birthDay + '\'' +
-                ", inviteToken='" + inviteToken + '\'' +
-                ", id=" + id +
-                ", account_status='" + account_status + '\'' +
-                ", position='" + position + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", positionId='" + positionId + '\'' +
+                ", accountStatus='" + accountStatus + '\'' +
+                ", currentPostiton=" + currentPostiton +
+                ", nextPosition=" + nextPosition +
+                ", achievements=" + toAchievementsString(achievements) +
+                ", bonuses=" + bonuses +
+                ", admin=" + admin +
+                ", createStamp=" + createStamp +
                 '}';
+    }
+
+    protected String toAchievementsString(List<Achieve> achievements) {
+        String result = "";
+        for (Achieve s : achievements) {
+            result += s.toString();
+        };
+        result += '}';
+        return result;
     }
 }

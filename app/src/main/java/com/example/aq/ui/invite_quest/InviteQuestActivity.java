@@ -1,41 +1,142 @@
 package com.example.aq.ui.invite_quest;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.aq.R;
-import com.example.aq.model.InviteAnswer;
 import com.example.aq.model.InviteQuest;
-import com.example.aq.ui.invite_quest.fragments.InviteQuestFragment;
+import com.example.aq.model.OwnPerson;
 import com.example.aq.util.PreferenceUtils;
 
-public class InviteQuestActivity extends AppCompatActivity {
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class InviteQuestActivity extends AppCompatActivity implements InviteQuestContract.View {
     public static final String TAG = InviteQuestActivity.class.getSimpleName();
 
     private EditText mEmail;
     private EditText mFirstname;
     private EditText mLastname;
-    private Button mSendInviteQuestButton;
     private InviteQuestPresenter mInviteQuestPresenter;
+    private TextView mTeleType;
+    private View mMainContainer;
+    private View mTypeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite_quest);
+        mMainContainer = findViewById(R.id.invite_quest_container);
+        mTypeContainer = findViewById(R.id.invite_type_container);
 
+        mTeleType = findViewById(R.id.invite_teletype);
+        mEmail = findViewById(R.id.invite_quest_email);
+        mFirstname = findViewById(R.id.invite_quest_firstname);
+        mLastname = findViewById(R.id.invite_quest_lastname);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.invite_quest_fragment, InviteQuestFragment.class, null)
-                    .commit();
+        mInviteQuestPresenter = new InviteQuestPresenter(InviteQuestActivity.this);
+            new Timer().scheduleAtFixedRate(new TimerTask(){
+                @Override
+                public void run(){
+                        mInviteQuestPresenter.updatePersonData();
+                }
+            },0,7000);
+        findViewById(R.id.invite_quest_send_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InviteQuest inviteQuest = new InviteQuest();
+                inviteQuest.setEmail(mEmail.getText().toString());
+                inviteQuest.setFirstName(mFirstname.getText().toString());
+                inviteQuest.setLastName(mLastname.getText().toString());
+                //inviteQuest.set(position.getText().toString());
+                mInviteQuestPresenter.requestData(inviteQuest);
+            }
+        });
+    }
+
+    @Override
+    public void showData(OwnPerson person) {
+        Log.wtf("RESPONSE", person.toString());
+
+        if (!TextUtils.isEmpty(person.getInviteToken())) {
+            PreferenceUtils.setToken(person.getInviteToken());
+            //mInviteQuestPresenter.updatePersonData();
+
+            // ... запрос в api с текущим токеном на получение инфы о юзере (а вдруг изменился)
+            // получение статуса аккаунта
+            // перенаправление на соответствующую активити (approved, rejected, fired)
+            showTeleType(person.getAccountStatus());
+  /*          new Timer().scheduleAtFixedRate(new TimerTask(){
+                @Override
+                public void run(){
+                        mInviteQuestPresenter.updatePersonData();
+                }
+            },0,100);*/
+        } else {
+            Toast.makeText(InviteQuestActivity.this, R.string.invite_error, Toast.LENGTH_SHORT);
         }
     }
 
+
+    @Override
+    public void onResponseFailure(Throwable t) {
+
+        Toast.makeText(InviteQuestActivity.this, R.string.invite_error, Toast.LENGTH_SHORT);
+
+        Log.wtf("ERROR", t.getMessage());
+    }
+
+    private void hideTeletype() {
+        mMainContainer.setVisibility(View.VISIBLE);
+        mTypeContainer.setVisibility(View.GONE);
+    }
+
+    private void showTeleType(String accountStatus) {
+        switch (accountStatus) {
+            case "approved":
+                mTeleType.setText(R.string.invite_approved);
+                if(!PreferenceUtils.isWelcomeShowed()) {
+                    mTeleType.postDelayed(new Runnable() {
+                                              @Override
+                                              public void run() {
+                                                  if(PreferenceUtils.isWelcomeShowed()) return;
+                                                  PreferenceUtils.isWelcomeShowed(true);
+        /*                                          Intent intent = new Intent(InviteQuestActivity.this, ProfileActivity.class);
+                                                  startActivity(intent);*/
+                                                  Toast.makeText(InviteQuestActivity.this, "Go to Profile!", Toast.LENGTH_SHORT).show();
+                                              }
+                                          }
+                            , 7000);
+                } else {
+/*                    Intent intent = new Intent(InviteQuestActivity.this, ProfileActivity.class);
+                    startActivity(intent);*/
+                    Toast.makeText(InviteQuestActivity.this, "Go to Profile!", Toast.LENGTH_SHORT).show();
+
+                }
+                break;
+
+            case "rejected":
+                mTeleType.setText(R.string.invite_rejected);
+                break;
+
+            case "fired":
+                mTeleType.setText(R.string.invite_fired);
+                break;
+
+            default:
+                mTeleType.setText(R.string.invite_pending);
+                break;
+
+        }
+        mMainContainer.setVisibility(View.GONE);
+        mTypeContainer.setVisibility(View.VISIBLE);
+    }
 }

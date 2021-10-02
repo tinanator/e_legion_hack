@@ -1,13 +1,24 @@
 package com.example.aq.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class InviteQuest implements Serializable {
+    @SerializedName("email")
     String email;
+
+    @SerializedName("firstname")
     String firstName;
+
+    @SerializedName("lastname")
     String lastName;
+/*
+    @SerializedName("birthday")
     String birthDay;
-    int position;
+
+    @SerializedName("position_id")
+    int positionId;*/
 
     public String getEmail() {
         return email;
@@ -33,30 +44,12 @@ public class InviteQuest implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
     @Override
     public String toString() {
         return "InviteQuest{" +
                 "email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", birthDay='" + birthDay + '\'' +
-                ", position=" + position +
                 '}';
     }
 }

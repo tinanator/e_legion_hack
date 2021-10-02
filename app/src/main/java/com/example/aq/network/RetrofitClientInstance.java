@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClientInstance {
-    public static final String BASE_URL = "https://elegioner.000webhostapp.com/api/";
+    public static final String BASE_URL = " https://aqutem.store/api/";
     private static Retrofit sRetrofit;
 
     public static Retrofit getInstance() {
