@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_dashboard"
+        android:icon="@android:drawable/btn_dialog"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_team"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:title="Affiliate" />
+    <item
+        android:id="@+id/nav_main"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_wallet"
+        android:icon="@android:drawable/checkbox_on_background"
+        android:title="My Account" />
+    <item
+        android:id="@+id/nav_more"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="More" />
+
+</menu>
