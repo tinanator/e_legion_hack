@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">E-Legion Персональная Книжка</string>
+
+    <string name="invite_approved">Поздравляем, теперь вы в команде e-legion!</string>
+    <string name="invite_pending">Ваша заяка на рассмотрении</string>
+    <string name="invite_rejected">Сожалеем, но заявка отклонена</string>
+    <string name="invite_fired">Сожалеем вы больше не с нами…</string>
+    <string name="invite_error">Что-то пошло не так!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_admin">AdminActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
