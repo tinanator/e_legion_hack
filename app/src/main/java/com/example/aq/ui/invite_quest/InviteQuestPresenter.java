@@ -10,7 +10,7 @@ public class InviteQuestPresenter implements InviteQuestContract.Presenter, Invi
 
     public InviteQuestPresenter(InviteQuestContract.View view) {
         this.view = view;
-        model = new AdminPedingCotractModel();
+        model = new InviteQuestCotractModel();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class InviteQuestPresenter implements InviteQuestContract.Presenter, Invi
 
     @Override
     public void requestData(InviteQuest inviteQuest) {
-        model.sendInviteQuest(inviteQuest, AdminPendingPresenter.this);
+        model.sendInviteQuest(inviteQuest, InviteQuestPresenter.this);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class InviteQuestPresenter implements InviteQuestContract.Presenter, Invi
     }
 
     public void updatePersonData() {
-        model.updatePersonData(AdminPendingPresenter.this);
+        model.updatePersonData(InviteQuestPresenter.this);
     }
 
     @Override

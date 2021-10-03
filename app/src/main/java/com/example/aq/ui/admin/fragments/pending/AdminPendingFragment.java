@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aq.R;
+import com.example.aq.model.AdminApproved;
 import com.example.aq.model.AdminApprovedAnswer;
 import com.example.aq.model.OtherPerson;
 import com.example.aq.network.RetrofitClientInstance;
@@ -38,9 +39,12 @@ public class AdminPendingFragment extends Fragment {
         mRecyclerView.setAdapter(new AdminPendingAdapter());
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setItemViewCacheSize(10);
-        mApiService = RetrofitClientInstance.getInstance().create(RetrofitClientInterface.class);
 
-        Call<AdminApprovedAnswer> call = mApiService.createInviteQuest(approved);
+        mApiService = RetrofitClientInstance.getInstance().create(RetrofitClientInterface.class);
+        Call<AdminApprovedAnswer> call = mApiService.sendApproved(new AdminApproved());
+
+
+   /*     Call<AdminApprovedAnswer> call = mApiService.sendApproved(new AdminApproved());
 
         call.enqueue(new Callback<AdminApprovedAnswer>() {
             @Override
@@ -54,6 +58,6 @@ public class AdminPendingFragment extends Fragment {
             public void onFailure(Call<AdminApprovedAnswer> call, Throwable t) {
                 onFinishedListener.onSendPendingFailure(t);
             }
-        });    }
+        });  */  }
 
 }

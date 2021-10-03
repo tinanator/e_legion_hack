@@ -26,7 +26,7 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
     private EditText mEmail;
     private EditText mFirstname;
     private EditText mLastname;
-    private com.example.aq.ui.invite_quest.AdminPendingPresenter mInviteQuestPresenter;
+    private com.example.aq.ui.invite_quest.InviteQuestPresenter mInviteQuestPresenter;
     private TextView mTeleType;
     private View mMainContainer;
     private View mTypeContainer;
@@ -43,7 +43,7 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
         mFirstname = findViewById(R.id.invite_quest_firstname);
         mLastname = findViewById(R.id.invite_quest_lastname);
 
-        mInviteQuestPresenter = new com.example.aq.ui.invite_quest.AdminPendingPresenter(InviteQuestActivity.this);
+        mInviteQuestPresenter = new com.example.aq.ui.invite_quest.InviteQuestPresenter(InviteQuestActivity.this);
             mTimer = new Timer();
                     mTimer.scheduleAtFixedRate(new TimerTask(){
                 @Override

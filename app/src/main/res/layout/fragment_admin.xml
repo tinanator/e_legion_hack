@@ -7,9 +7,10 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.launch.LaunchActivity"
-    android:background="@color/teal_700">
+    android:background="@color/softlight">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/white"
         android:text="@string/title_home" />
 </LinearLayout>

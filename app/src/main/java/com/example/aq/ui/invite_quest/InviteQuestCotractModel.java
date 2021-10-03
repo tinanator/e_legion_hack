@@ -14,7 +14,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InviteQuestCotractModel implements InviteQuestContract.Model {
-    public static final String TAG = AdminPedingCotractModel.class.getSimpleName();
+    public static final String TAG = InviteQuestCotractModel.class.getSimpleName();
     RetrofitClientInterface mApiService;
     public InviteQuestCotractModel() {
         mApiService = RetrofitClientInstance.getInstance().create(RetrofitClientInterface.class);

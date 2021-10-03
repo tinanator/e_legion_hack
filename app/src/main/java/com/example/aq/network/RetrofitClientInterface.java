@@ -54,8 +54,6 @@ public interface RetrofitClientInterface {
     Call<List<OtherPerson>> getAllPersonsList(@Path("token") String token);
 
 
-    @GET("admin/persons/pending/{token}")
-    Call<List<OtherPerson>> getAllPendingList(@Path("token") String token);
 
     @GET("admin/persons/approved/{token}")
     Call<List<OtherPerson>> getApprovedList(@Path("token") String token);
@@ -67,6 +65,8 @@ public interface RetrofitClientInterface {
     Call<OtherPerson> getFiredList();
 
 
+    @GET("admin/persons/pending/{token}")
+    Call<List<OtherPerson>> getAllPendingList(@Path("token") String token);
 
     @POST("admin/approved/person/{token}")
     Call<AdminApprovedAnswer> sendApproved(@Body AdminApproved approved);
