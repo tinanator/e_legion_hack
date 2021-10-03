@@ -1,4 +1,4 @@
-package com.example.aq.ui.admin.fragments;
+package com.example.aq.ui.admin.fragments.approved;
 import androidx.fragment.app.Fragment;
 
 import com.example.aq.R;

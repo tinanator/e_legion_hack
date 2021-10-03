@@ -1,25 +1,29 @@
 package com.example.aq.ui.invite_quest;
 
-import com.example.aq.model.InviteAnswer;
 import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
-import com.example.aq.model.Person;
-import com.example.aq.model.Sere;
 
 public interface InviteQuestContract {
     interface Model {
 
-        interface OnFinishedListener {
-            void onFinished (OwnPerson person);
-            void onFailure(Throwable t);
+        interface InsertOnFinishedListener {
+            void onInsertFinished (OwnPerson person);
+            void onInsertFailure(Throwable t);
         }
 
-        void sendInviteQuest(InviteQuest inviteQuest, OnFinishedListener onFinishedListener);
-        void updatePersonData(OnFinishedListener onFinishedListener);
+        interface UpdateOnFinishedListener {
+            void onUpdateFinished (OwnPerson person);
+            void onUpdateFailure(Throwable t);
+        }
+
+        void sendInviteQuest(InviteQuest inviteQuest, InsertOnFinishedListener onFinishedListener);
+        void updatePersonData(UpdateOnFinishedListener onFinishedListener);
     }
     interface View {
-        void showData(OwnPerson person);
-        void onResponseFailure(Throwable t);
+        void showInsertData(OwnPerson person);
+        void onIsertResponseFailure(Throwable t);
+        void showUpdateData(OwnPerson person);
+        void onUpdateResponseFailure(Throwable t);
     }
     interface Presenter {
         void onDestroy();

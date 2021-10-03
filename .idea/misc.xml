@@ -3,13 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_free_icon_gold_medal_625303_1.xml" value="0.3494791666666667" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.22135416666666666" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/activity_invite_quest.xml" value="0.20572916666666666" />
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.18020833333333333" />
+        <entry key="app/src/main/res/layout/activity_logon.xml" value="0.16510416666666666" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_admin.xml" value="0.3333333333333333" />
         <entry key="app/src/main/res/layout/fragment_invite_pending.xml" value="0.33" />
         <entry key="app/src/main/res/layout/launch_activity.xml" value="0.18072916666666666" />
+        <entry key="app/src/main/res/layout/li_achieve.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/li_kitten.xml" value="0.42003853564547206" />
+        <entry key="app/src/main/res/layout/list_approved_reward.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/list_pending.xml" value="0.5" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.203125" />
       </map>
     </option>

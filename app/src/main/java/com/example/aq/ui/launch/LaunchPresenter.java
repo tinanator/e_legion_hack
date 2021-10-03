@@ -3,6 +3,7 @@ package com.example.aq.ui.launch;
 
 import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
+import com.example.aq.network.RetrofitClientInstance;
 
 public class LaunchPresenter implements LaunchContract.Presenter, LaunchContract.Model.OnFinishedListener {
     LaunchContract.Model model;
@@ -15,7 +16,9 @@ public class LaunchPresenter implements LaunchContract.Presenter, LaunchContract
 
     @Override
     public void onDestroy() {
+        //model = null;
         view = null;
+
     }
 
     @Override

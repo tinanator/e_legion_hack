@@ -31,11 +31,4 @@ public class PreferenceUtils {
         return sSharedPreferences.getBoolean("welcome", false);
     }
 
-    public static void isAdmin(boolean b) {
-        sSharedPreferences.edit().putBoolean("admin", b).commit();
-    }
-
-    public static boolean isAdmin() {
-        return sSharedPreferences.getBoolean("admin", false);
-    }
 }

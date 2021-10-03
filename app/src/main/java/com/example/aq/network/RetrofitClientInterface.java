@@ -1,7 +1,10 @@
 package com.example.aq.network;
 
+import com.example.aq.model.AdminApproved;
+import com.example.aq.model.AdminApprovedAnswer;
 import com.example.aq.model.InviteAnswer;
 import com.example.aq.model.InviteQuest;
+import com.example.aq.model.OtherPerson;
 import com.example.aq.model.OwnPerson;
 import com.example.aq.model.Person;
 import com.example.aq.model.Sere;
@@ -45,18 +48,26 @@ public interface RetrofitClientInterface {
     @GET("person/{token}")
     Call<OwnPerson> updatePersonData(@Path("token") String token);
 
-    @GET("admin/persons")
-    Call<List<Person>> getAllPersonsList();
 
-    @GET("admin/persons/pending")
-    Call<List<Person>> getAllPendingList();
 
-    @GET("admin/persons/approved")
-    Call<List<Person>> getApprovedList();
+    @GET("admin/persons/{token}")
+    Call<List<OtherPerson>> getAllPersonsList(@Path("token") String token);
 
-    @GET("admin/persons/rejected")
-    Call<List<Person>> getRejectedList();
 
-    @GET("admin/persons/fired")
-    Call<Person> getFiredList();
+    @GET("admin/persons/pending/{token}")
+    Call<List<OtherPerson>> getAllPendingList(@Path("token") String token);
+
+    @GET("admin/persons/approved/{token}")
+    Call<List<OtherPerson>> getApprovedList(@Path("token") String token);
+
+    @GET("admin/persons/rejected/{token}")
+    Call<List<OtherPerson>> getRejectedList(@Path("token") String token);
+
+    @GET("admin/persons/fired/{token}")
+    Call<OtherPerson> getFiredList();
+
+
+
+    @POST("admin/approved/person/{token}")
+    Call<AdminApprovedAnswer> sendApproved(@Body AdminApproved approved);
 }

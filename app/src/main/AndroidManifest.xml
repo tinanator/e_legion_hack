@@ -18,8 +18,7 @@
             android:label="@string/title_activity_admin" />
         <activity
             android:name=".ui.launch.LaunchActivity"
-            android:exported="true"
-            android:launchMode="singleInstance">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +26,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.invite_quest.InviteQuestActivity" />
-        <activity android:name="com.example.eq.ui.user.ProfileActivity" />
+        <activity android:name=".ui.user.profile.LogonActivity" />
+        <activity android:name=".ui.user.calendar.CalendarActivity" />
+        <activity android:name=".ui.user.calendar.AddNoteActivity" />
+        <activity android:name=".ui.user.calendar.NotePreviewActivity" />
     </application>
 
 </manifest>

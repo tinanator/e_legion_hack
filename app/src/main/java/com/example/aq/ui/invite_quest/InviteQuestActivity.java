@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.aq.R;
 import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
+import com.example.aq.ui.user.profile.LogonActivity;
 import com.example.aq.util.PreferenceUtils;
 
 import java.util.Timer;
@@ -25,11 +26,11 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
     private EditText mEmail;
     private EditText mFirstname;
     private EditText mLastname;
-    private InviteQuestPresenter mInviteQuestPresenter;
+    private com.example.aq.ui.invite_quest.AdminPendingPresenter mInviteQuestPresenter;
     private TextView mTeleType;
     private View mMainContainer;
     private View mTypeContainer;
-
+    private Timer mTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +43,14 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
         mFirstname = findViewById(R.id.invite_quest_firstname);
         mLastname = findViewById(R.id.invite_quest_lastname);
 
-        mInviteQuestPresenter = new InviteQuestPresenter(InviteQuestActivity.this);
-            new Timer().scheduleAtFixedRate(new TimerTask(){
+        mInviteQuestPresenter = new com.example.aq.ui.invite_quest.AdminPendingPresenter(InviteQuestActivity.this);
+            mTimer = new Timer();
+                    mTimer.scheduleAtFixedRate(new TimerTask(){
                 @Override
                 public void run(){
-                        mInviteQuestPresenter.updatePersonData();
+                    if(mInviteQuestPresenter != null)
+                        if(!TextUtils.isEmpty(PreferenceUtils.getToken()))
+                            mInviteQuestPresenter.updatePersonData();
                 }
             },0,7000);
         findViewById(R.id.invite_quest_send_button).setOnClickListener(new View.OnClickListener() {
@@ -63,7 +67,7 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
     }
 
     @Override
-    public void showData(OwnPerson person) {
+    public void showInsertData(OwnPerson person) {
         Log.wtf("RESPONSE", person.toString());
 
         if (!TextUtils.isEmpty(person.getInviteToken())) {
@@ -87,11 +91,22 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
 
 
     @Override
-    public void onResponseFailure(Throwable t) {
+    public void onIsertResponseFailure(Throwable t) {
 
         Toast.makeText(InviteQuestActivity.this, R.string.invite_error, Toast.LENGTH_SHORT);
 
         Log.wtf("ERROR", t.getMessage());
+    }
+
+    @Override
+    public void showUpdateData(OwnPerson person) {
+        showTeleType(person.getAccountStatus());
+    }
+
+    @Override
+    public void onUpdateResponseFailure(Throwable t) {
+        Toast.makeText(InviteQuestActivity.this, R.string.invite_error, Toast.LENGTH_SHORT);
+
     }
 
     private void hideTeletype() {
@@ -104,21 +119,31 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
             case "approved":
                 mTeleType.setText(R.string.invite_approved);
                 if(!PreferenceUtils.isWelcomeShowed()) {
+                    PreferenceUtils.isWelcomeShowed(true);
+                    setResult(0);
+                    Intent intent = new Intent(InviteQuestActivity.this, LogonActivity.class);
+                    startActivity(intent);
+                    //mInviteQuestPresenter.onDestroy();
+   /*
                     mTeleType.postDelayed(new Runnable() {
                                               @Override
                                               public void run() {
                                                   if(PreferenceUtils.isWelcomeShowed()) return;
-                                                  PreferenceUtils.isWelcomeShowed(true);
-        /*                                          Intent intent = new Intent(InviteQuestActivity.this, ProfileActivity.class);
-                                                  startActivity(intent);*/
+
                                                   Toast.makeText(InviteQuestActivity.this, "Go to Profile!", Toast.LENGTH_SHORT).show();
+
+
                                               }
                                           }
-                            , 7000);
+                            , 7000);*/
+                    finish();
                 } else {
-/*                    Intent intent = new Intent(InviteQuestActivity.this, ProfileActivity.class);
-                    startActivity(intent);*/
+                    setResult(0);
+                    Intent intent = new Intent(InviteQuestActivity.this, LogonActivity.class);
+                    startActivity(intent);
                     Toast.makeText(InviteQuestActivity.this, "Go to Profile!", Toast.LENGTH_SHORT).show();
+                    mInviteQuestPresenter.onDestroy();
+                    finish();
 
                 }
                 break;
@@ -138,5 +163,12 @@ public class InviteQuestActivity extends AppCompatActivity implements InviteQues
         }
         mMainContainer.setVisibility(View.GONE);
         mTypeContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTimer.cancel();
+        mInviteQuestPresenter.onDestroy();
     }
 }

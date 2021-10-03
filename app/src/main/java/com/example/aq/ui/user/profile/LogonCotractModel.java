@@ -1,8 +1,7 @@
-package com.example.aq.ui.launch;
+package com.example.aq.ui.user.profile;
 
 import android.util.Log;
 
-import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
 import com.example.aq.network.RetrofitClientInstance;
 import com.example.aq.network.RetrofitClientInterface;
@@ -13,10 +12,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LaunchCotractModel implements LaunchContract.Model {
-    public static final String TAG = LaunchCotractModel.class.getSimpleName();
+public class LogonCotractModel implements LogonContract.Model {
+    public static final String TAG = LogonCotractModel.class.getSimpleName();
     RetrofitClientInterface mApiService;
-    public LaunchCotractModel() {
+    public LogonCotractModel() {
         mApiService = RetrofitClientInstance.getInstance().create(RetrofitClientInterface.class);
 
     }
@@ -30,8 +29,7 @@ public class LaunchCotractModel implements LaunchContract.Model {
                 @Override
                 public void onResponse(Call<OwnPerson> call, Response<OwnPerson> response) {
                     Log.wtf(TAG, "UPDATE:" +response.raw().toString());
-                    if(response.body() != null && response.body().getInviteToken() != null)
-                        PersonSettings.setPerson(response.body());
+                    PersonSettings.setPerson(response.body());
 
                     onFinishedListener.onFinished(response.body());
                 }

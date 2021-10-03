@@ -2,11 +2,8 @@ package com.example.aq.ui.invite_quest;
 
 import android.util.Log;
 
-import com.example.aq.model.InviteAnswer;
 import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
-import com.example.aq.model.Person;
-import com.example.aq.model.Sere;
 import com.example.aq.network.RetrofitClientInstance;
 import com.example.aq.network.RetrofitClientInterface;
 import com.example.aq.util.PersonSettings;
@@ -15,10 +12,9 @@ import com.example.aq.util.PreferenceUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class InviteQuestCotractModel implements InviteQuestContract.Model {
-    public static final String TAG = InviteQuestCotractModel.class.getSimpleName();
+    public static final String TAG = AdminPedingCotractModel.class.getSimpleName();
     RetrofitClientInterface mApiService;
     public InviteQuestCotractModel() {
         mApiService = RetrofitClientInstance.getInstance().create(RetrofitClientInterface.class);
@@ -26,7 +22,7 @@ public class InviteQuestCotractModel implements InviteQuestContract.Model {
 
 
     @Override
-    public void sendInviteQuest(InviteQuest inviteQuest, OnFinishedListener onFinishedListener) {
+    public void sendInviteQuest(InviteQuest inviteQuest, InsertOnFinishedListener onFinishedListener) {
 
         Call<OwnPerson> call = mApiService.createInviteQuest(inviteQuest);
 
@@ -36,17 +32,17 @@ public class InviteQuestCotractModel implements InviteQuestContract.Model {
                 //Log.wtf(TAG, response.raw().toString());
                 PersonSettings.setPerson(response.body());
 
-                onFinishedListener.onFinished(response.body());
+                onFinishedListener.onInsertFinished(response.body());
             }
 
             @Override
             public void onFailure(Call<OwnPerson> call, Throwable t) {
-                onFinishedListener.onFailure(t);
+                onFinishedListener.onInsertFailure(t);
             }
         });
     }
     @Override
-        public void updatePersonData(OnFinishedListener onFinishedListener) {
+        public void updatePersonData(UpdateOnFinishedListener onFinishedListener) {
 
             Call<OwnPerson> call = mApiService.updatePersonData(PreferenceUtils.getToken());
 
@@ -54,14 +50,15 @@ public class InviteQuestCotractModel implements InviteQuestContract.Model {
                 @Override
                 public void onResponse(Call<OwnPerson> call, Response<OwnPerson> response) {
                     Log.wtf(TAG, "UPDATE:" +response.raw().toString());
-                    PersonSettings.setPerson(response.body());
+                    if(response.body() != null && response.body().getInviteToken() != null)
+                        PersonSettings.setPerson(response.body());
 
-                    onFinishedListener.onFinished(response.body());
+                    onFinishedListener.onUpdateFinished(response.body());
                 }
 
                 @Override
                 public void onFailure(Call<OwnPerson> call, Throwable t) {
-                    onFinishedListener.onFailure(t);
+                    onFinishedListener.onUpdateFailure(t);
                 }
             });
     }

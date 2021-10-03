@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:enabled="true" android:id="@+id/logon_side_item_calendar" android:title="@string/profile_calendar">Календарь</item>
+<item android:enabled="true" android:id="@+id/logon_side_item_admin"
+    android:title="Admin Panel" android:visible="false">Админ Панель</item>
+</menu>

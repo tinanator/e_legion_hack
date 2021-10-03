@@ -1,16 +1,17 @@
-package com.example.aq.ui.invite_quest;
+package com.example.aq.ui.admin.fragments.pending;
 
 
 import com.example.aq.model.InviteQuest;
 import com.example.aq.model.OwnPerson;
+import com.example.aq.ui.admin.fragments.pending.AdminPedingCotract;
 
-public class InviteQuestPresenter implements InviteQuestContract.Presenter, InviteQuestContract.Model.InsertOnFinishedListener, InviteQuestContract.Model.UpdateOnFinishedListener {
-    InviteQuestContract.Model model;
-    InviteQuestContract.View view;
+public class AdminPendingPresenter implements AdminPedingCotract.Presenter, AdminPedingCotract.Model.InsertOnFinishedListener, AdminPedingCotract.Model.UpdateOnFinishedListener {
+    AdminPedingCotract.Model model;
+    AdminPedingCotract.View view;
 
-    public InviteQuestPresenter(InviteQuestContract.View view) {
+    public AdminPendingPresenter(AdminPedingCotractModel.View view) {
         this.view = view;
-        model = new AdminPedingCotractModel();
+        this.model = new AdminPedingCotractModel();
     }
 
     @Override
@@ -19,6 +20,7 @@ public class InviteQuestPresenter implements InviteQuestContract.Presenter, Invi
         //model = null;
     }
 
+/*
     @Override
     public void requestData(InviteQuest inviteQuest) {
         model.sendInviteQuest(inviteQuest, AdminPendingPresenter.this);
@@ -46,5 +48,8 @@ public class InviteQuestPresenter implements InviteQuestContract.Presenter, Invi
     @Override
     public void onUpdateFailure(Throwable t) {
         view.onUpdateResponseFailure(t);
-    }
+    }*/
+    
+    
+    
 }

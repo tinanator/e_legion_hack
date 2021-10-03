@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.aq.R;
-import com.example.aq.ui.admin.fragments.AdminAllFragment;
-import com.example.aq.ui.admin.fragments.AdminFragment;
-import com.example.aq.ui.admin.fragments.AdminPendingFragment;
+import com.example.aq.ui.admin.fragments.all.AdminAllFragment;
+import com.example.aq.ui.admin.fragments.approved.AdminFragment;
+import com.example.aq.ui.admin.fragments.pending.AdminPendingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

@@ -4,7 +4,7 @@ public class Position {
     int id;
     String name;
     int active;
-    int amout;
+    int amount;
 
     public int getId() {
         return id;
@@ -30,12 +30,12 @@ public class Position {
         this.active = active;
     }
 
-    public int getAmout() {
-        return amout;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmout(int amout) {
-        this.amout = amout;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Position {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", active=" + active +
-                ", amout=" + amout +
+                ", amout=" + amount +
                 '}';
     }
 }
